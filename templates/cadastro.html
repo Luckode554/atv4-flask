@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block titulo %}Contato e cadastro — Rascunho{% endblock %}
+
+{% block conteudo %}
+<h1>Cadastro de alunos</h1>
+<p>Informe seu nome, curso e e-mail para participar deste espaço de estudos.</p>
+
+<img class="img-fluid rounded mb-4 about-img"
+     src="{{ url_for('static', filename='img/contato.jpg') }}"
+     alt="Imagem da página de contato">
+
+<div class="alert alert-info" role="alert">
+    Use dados fictícios nesta atividade. Os registros aparecem na listagem pública.
+</div>
+
+<!-- A rota /contato recebe os campos identificados pelo atributo name. -->
+<form action="{{ url_for('contato') }}" method="post" class="formulario">
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" id="nome" name="nome" class="form-control"
+               maxlength="100" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="curso" class="form-label">Curso</label>
+        <input type="text" id="curso" name="curso" class="form-control"
+               maxlength="100" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" id="email" name="email" class="form-control"
+               maxlength="150" required>
+    </div>
+
+    <button type="submit" class="btn btn-success">Cadastrar</button>
+</form>
+{% endblock %}

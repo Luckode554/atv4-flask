@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block titulo %}Rascunho — um blog de estudos{% endblock %}
+
+{% block conteudo %}
+
+    <section class="intro mb-4">
+      <h1>Anotações sobre código, aprendizado e o que estou testando.</h1>
+      <p class="text-muted">
+        Este é um espaço pessoal para registrar o processo de aprender
+        desenvolvimento web — os acertos, os erros e o que ficou pelo caminho.
+      </p>
+
+      <button type="button" class="btn btn-outline-success btn-sm"
+              data-bs-toggle="modal" data-bs-target="#aboutModal">
+        Como esse blog começou?
+      </button>
+    </section>
+
+    <!-- O Bootstrap controla a troca das imagens do carrossel. -->
+    <div id="postsCarousel" class="carousel slide mb-5">
+      <div class="carousel-indicators">
+        <button type="button"
+             data-bs-target="#postsCarousel"
+             data-bs-slide-to="0"
+             class="active"
+             aria-current="true"
+             aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#postsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#postsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+
+      <div class="carousel-inner rounded-4 overflow-hidden">
+        <div class="carousel-item active">
+          <img
+               src="{{ url_for('static', filename='img/hero.jpg') }}"
+               class="d-block w-100 carousel-img"
+               alt="Caderno aberto sobre a mesa, ao lado de um teclado">
+          <div class="carousel-caption d-none d-md-block">
+            <h2 class="h5">Aprendendo Flexbox na prática</h2>
+            <p>Como o Flexbox resolve a distribuição de espaço sozinho.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+               src="{{ url_for('static', filename='img/post-flexbox.jpg') }}"
+               class="d-block w-100 carousel-img"
+               alt="Tela de laptop exibindo linhas de código">
+          <div class="carousel-caption d-none d-md-block">
+            <h2 class="h5">Por que comentar o código importa</h2>
+            <p>Um comentário bem colocado economiza tempo no futuro.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+               src="{{ url_for('static', filename='img/sobre.jpg') }}"
+               class="d-block w-100 carousel-img"
+               alt="Xícara de café ao lado de um caderno aberto">
+          <div class="carousel-caption d-none d-md-block">
+            <h2 class="h5">Primeiros passos com Python</h2>
+            <p>Automatizando tarefas repetitivas com um script simples.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#postsCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#postsCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
+
+    <!-- Uma coluna no celular e três a partir de telas médias. -->
+    <section aria-label="Anotações recentes">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+      <div class="col">
+        <article class="card h-100 post-card">
+          <img
+               src="{{ url_for('static', filename='img/post-flexbox.jpg') }}"
+               class="card-img-top"
+               alt="Tela de laptop exibindo linhas de código">
+          <div class="card-body">
+            <span class="badge categoria mb-2">CSS</span>
+            <h2 class="card-title h5">Aprendendo Flexbox na prática</h2>
+            <p class="card-text text-muted small">12 de março de 2026</p>
+            <p class="card-text">
+              Depois de anos empurrando tudo com margens no chute, resolvi
+              entender de verdade como o Flexbox distribui espaço.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col">
+        <article class="card h-100 post-card">
+          <img
+               src="{{ url_for('static', filename='img/hero.jpg') }}"
+               class="card-img-top"
+               alt="Caderno aberto sobre a mesa, ao lado de um teclado">
+          <div class="card-body">
+            <span class="badge categoria mb-2">Boas práticas</span>
+            <h2 class="card-title h5">Por que comentar o código importa</h2>
+            <p class="card-text text-muted small">3 de março de 2026</p>
+            <p class="card-text">
+              Um comentário bem colocado economiza vinte minutos de
+              "por que eu escrevi isso?" daqui a duas semanas.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col">
+        <article class="card h-100 post-card">
+          <img
+               src="{{ url_for('static', filename='img/sobre.jpg') }}"
+               class="card-img-top"
+               alt="Xícara de café ao lado de um caderno aberto">
+          <div class="card-body">
+            <span class="badge categoria mb-2">Python</span>
+            <h2 class="card-title h5">Primeiros passos com Python</h2>
+            <p class="card-text text-muted small">21 de fevereiro de 2026</p>
+            <p class="card-text">
+              Um script pequeno pode economizar um trabalho repetitivo
+              enorme — registro aqui o primeiro que escrevi.
+            </p>
+          </div>
+        </article>
+      </div>
+
+    </div>
+    </section>
+
+    <!-- A janela abaixo é aberta pelo botão no início da página. -->
+  <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="aboutModalLabel">Sobre o Rascunho</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            O Rascunho começou como um caderno de anotações que virou site —
+            um espaço pra registrar o processo de aprender programação sem
+            esperar estar "pronto" pra publicar.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a href="{{ url_for('sobre') }}" class="btn btn-success">Ler mais sobre</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

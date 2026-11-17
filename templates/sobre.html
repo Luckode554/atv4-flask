@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block titulo %}Sobre — Rascunho{% endblock %}
+
+{% block conteudo %}
+    <h1 class="mb-4">Sobre este blog</h1>
+
+    <img src="{{ url_for('static', filename='img/sobre.jpg') }}" class="img-fluid rounded-4 mb-4 about-img"
+         alt="Xícara de café ao lado de um caderno aberto sobre a mesa">
+
+    <p>
+      O Rascunho começou como um caderno de anotações que virou site.
+      A ideia é simples: escrever sobre o que estou aprendendo — em
+      programação, ferramentas ou qualquer coisa que valha a pena
+      registrar.
+    </p>
+    <p>
+      Nem todo post aqui vai envelhecer bem, e tudo bem. É mais um
+      diário de estudos do que um manual definitivo de nada.
+    </p>
+
+    <h2 class="h4 mt-5 mb-3">Sobre o que eu escrevo</h2>
+
+    <ul class="list-group">
+      <li class="list-group-item">HTML e CSS</li>
+      <li class="list-group-item">Python</li>
+      <li class="list-group-item">Automação</li>
+      <li class="list-group-item">Boas práticas</li>
+      <li class="list-group-item">Ferramentas do dia a dia</li>
+    </ul>
+{% endblock %}

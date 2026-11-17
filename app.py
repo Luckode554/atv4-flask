@@ -1,3 +1,4 @@
+
 import os
 import pymysql
 from dotenv import load_dotenv
@@ -7,6 +8,7 @@ load_dotenv()
 app = Flask(__name__)
 
 
+# Abre a conexão com o MySQL usando as variáveis do .env.
 def conectar_bd():
     return pymysql.connect(
         host=os.getenv("DB_HOST"),
@@ -29,19 +31,20 @@ def sobre():
     return render_template("sobre.html")
 
 
+# Exibe o formulário e recebe os comentários.
 @app.route("/contato", methods=["GET", "POST"])
 def contato():
     if request.method == "POST":
         nome = request.form["nome"]
-        curso = request.form["curso"]
-        email = request.form["email"]
+        assunto = request.form["assunto"]
+        mensagem = request.form["mensagem"]
 
         conexao = conectar_bd()
         try:
             with conexao.cursor() as cursor:
                 cursor.execute(
-                    "INSERT INTO alunos (nome, curso, email) VALUES (%s, %s, %s)",
-                    (nome, curso, email)
+                    "INSERT INTO comentarios (nome, assunto, mensagem) VALUES (%s, %s, %s)",
+                    (nome, assunto, mensagem)
                 )
             conexao.commit()
         finally:
@@ -52,16 +55,18 @@ def contato():
     return render_template("cadastro.html")
 
 
+# Consulta os comentários e envia os dados para o HTML.
 @app.route("/listar")
 def listar():
     conexao = conectar_bd()
     try:
         with conexao.cursor() as cursor:
-            cursor.execute("SELECT * FROM alunos")
-            alunos = cursor.fetchall()
+            cursor.execute("SELECT * FROM comentarios ORDER BY id DESC")
+            comentarios = cursor.fetchall()
     finally:
         conexao.close()
-    return render_template("listar.html", alunos=alunos)
+
+    return render_template("listar.html", comentarios=comentarios)
 
 
 if __name__ == "__main__":
